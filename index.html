@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+        }
+
+        .todo-container {
+            border: 1px solid #ccc;
+            padding: 40px;
+            border-radius:50px;
+        }
+
+        .todo-input {
+            width: 92%;
+            padding: 10px;
+            border: 1px solid #ccf1c2;
+            border-radius: 3px;
+        }
+
+        .todo-button {
+            background-color: #3020be;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .todo-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .todo-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .todo-item input {
+            margin-right: 10px;
+        }
+
+        .todo-item button {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="todo-container">
+        <input type="text" class="todo-input" placeholder="Add a task">
+        <button class="todo-button">Add</button>
+        <ul class="todo-list"></ul>
+    </div>
+    <div><br><center>
+        made by <button>Soumojit Garai</button> 
+    </center>
+      </div>
+
+    <script>
+        const todoInput = document.querySelector('.todo-input');
+        const todoButton = document.querySelector('.todo-button');
+        const todoList = document.querySelector('.todo-list');
+
+        todoButton.addEventListener('click', addTodo);
+
+        function addTodo() {
+            const todoValue = todoInput.value;
+            if (todoValue) {
+                const todoItem = document.createElement('li');
+                todoItem.classList.add('todo-item');
+                todoItem.innerHTML = `
+                    <input type="checkbox">
+                    <span>${todoValue}</span>
+                    <button class="delete-button">Delete</button>
+                `;
+
+                todoList.appendChild(todoItem);
+                todoInput.value = '';
+
+                const deleteButton = todoItem.querySelector('.delete-button');
+                deleteButton.addEventListener('click', () => {
+                    todoList.removeChild(todoItem);
+                });
+            }
+        }
+    </script>
+</body>
+</html>
